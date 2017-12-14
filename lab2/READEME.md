@@ -3,8 +3,8 @@
 ## 需要更改的系统文件
 
 - include/unistd.h
-- kernel/system_call.s
 - include/linux/sys.h
+- kernel/system_call.s
 
 ## 需要自己添加的文件
 
@@ -19,6 +19,7 @@
 - iam.c
 - whoami.c
 
+## 评分文件
 
-
-
+- testlab2.c
+- testlab2.sh
