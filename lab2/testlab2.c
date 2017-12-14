@@ -131,13 +131,13 @@ int test(const char* name, int max_score, int expected_rval1, int size, int expe
 /*改动＋＋：比较多 ，但还是顺序的改改*/
 
     if(rval == expected_rval2)
-    {   
+    {
         if(rval == -1)
         {
             printf("PASS\n");
             score = max_score;
-        }       
-        else 
+        }
+        else
         {
             if (strcmp(gotname, name) == 0)
             {
