@@ -129,6 +129,25 @@
 #define __NR_ssetmask	69
 #define __NR_setreuid	70
 #define __NR_setregid	71
+#define __NR_sem_open 72
+#define __NR_sem_wait 73
+#define __NR_sem_post 74
+#define __NR_sem_unlink 75
+
+#define QUE_LEN 16
+#define NAME_LEN 16
+/* 定义进程等待队列 */
+typedef struct semaphore_queue{
+  int front, rear;
+  struct task_struct *wait_tasks[QUE_LEN];
+}sem_queue;
+/* 定义信号量 */
+typedef struct semaphore_t{
+  int value;
+  int occupied;
+  char name[NAME_LEN+1];
+  sem_queue wait_queue;
+}sem_t;
 
 #define _syscall0(type,name) \
 type name(void) \
