@@ -5,4 +5,3 @@
    2. 改写 setup.s 主要完成如下功能：
       + bootsect.s 能完成 setup.s 的载入，并跳转到 setup.s 开始地址执行。而 setup.s 向屏幕输出一行“Now we are in SETUP”。
    
-   
