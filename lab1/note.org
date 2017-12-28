@@ -1,0 +1,10 @@
+* 操作系统的引导
+** 实验内容
+   改写 bootsect.s 主要完成如下功能：
+   1. bootsect.s 能在屏幕上打印一段提示信息“XXX is booting...”，其中 XXX 是你给操
+作系统起的名字，例如 LZJos、Sunix 等。
+   
+   改写 setup.s 主要完成如下功能：
+   1. bootsect.s 能完成 setup.s 的载入，并跳转到 setup.s 开始地址执行。而 setup.s 
+向屏幕输出一行“Now we are in SETUP”。
+   
