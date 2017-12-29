@@ -10,14 +10,16 @@
    1. 在 bootsect.s 中输出字符串的方法是
       #+srcname: bootsect
       #+begin_src asm
-        mov	ah,#0x03		! 获取光标位置
+        mov	ah,#0x03  ! 获取光标位置
         xor	bh,bh
         int	0x10
 
-        mov	cx,#27        ! 要输出的信息的长度（包括回车和换行符）
-        mov	bx,#0x0007		! page 0, attribute 7 (normal)
-        mov	bp,#msg1      ! 这是要输出的信息
-        mov	ax,#0x1301		! write string, move cursor
+        mov	cx,#27  ! 要输出的信息的长度（包括回车和换行符）
+        mov	bx,#0x0007  ! page 0, attribute 7 (normal)
+        mov	bp,#msg1  ! 这是要输出的信息
+        mov	ax,#0x1301  ! write string, move cursor
         int	0x10
       #+end_src
+      所以只需要更改一下 msg1 以及字符串的长度就可以了，注意长度不能超过 32。
+    2. 完成了第一个要求，那么第二个要求的第一部分就很简单了
 ** 实验报告
