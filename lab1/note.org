@@ -1,3 +1,4 @@
+-*-  mode: org; mode: visual-line -*-
 * 操作系统的引导
 ** 实验内容
    1. 改写 bootsect.s 主要完成如下功能：
@@ -8,7 +9,6 @@
       + setup.s 不再加载Linux内核，保持上述信息显示在屏幕上即可。
 ** 实验过程
    1. 在 bootsect.s 中输出字符串的方法是
-      #+srcname: bootsect
       #+begin_src asm
         mov	ah,#0x03  ! 获取光标位置
         xor	bh,bh
@@ -20,6 +20,12 @@
         mov	ax,#0x1301  ! write string, move cursor
         int	0x10
       #+end_src
-      所以只需要更改一下 msg1 以及字符串的长度就可以了，注意长度不能超过 32。
-    2. 完成了第一个要求，那么第二个要求的第一部分就很简单了
+      所以只需要更改一下 msg1 以及字符串的长度就可以了，注意字符串长度不能超过 32。
+   2. 对 setup.s 的改动
+      + 完成了第一个要求，那么第二个要求的第一部分就很简单了，我们看到了在 bootsect.s 中如何输出一个字符串，那么自然就可以在 setup.s 中输出字符串。首先按照 bootsect.s 中的 msg1 在 setup.s 中定义一个 msg0 是要输出的信息，然后就把上面的代码复制到 setup.s 的代码段最开始的地方。不过如果只做到这儿，输出的可能是乱码，也可能是看不见的字符，总之不是我们想要的信息。这是因为在输出的时候我们用到了扩展段寄存器`es`，而在 setup.s一开始的时候`es`存储的并不是这段代码的开始地址，所以需要给`es`赋值，而我们不能直接使用`mov`给段寄存器赋值所以使用下面代码
+        #+BEGIN_SRC asm
+          mov ax,#SETUPSEG  ! SETUPSEG是 setup.s 代码段开始的地址
+          mov es,ax
+        #+END_SRC
+      + 接下来
 ** 实验报告
