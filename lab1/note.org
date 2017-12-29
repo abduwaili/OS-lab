@@ -4,4 +4,20 @@
       + bootsect.s 能在屏幕上打印一段提示信息“XXX is booting...”，其中 XXX 是你给操作系统起的名字，例如 LZJos、Sunix 等。
    2. 改写 setup.s 主要完成如下功能：
       + bootsect.s 能完成 setup.s 的载入，并跳转到 setup.s 开始地址执行。而 setup.s 向屏幕输出一行“Now we are in SETUP”。
-   
+      + setup.s 能获取至少一个基本的硬件参数（如内存参数、显卡参数、硬盘参数等），将其放在内存的特定地址，并输出到屏幕上。
+      + setup.s 不再加载Linux内核，保持上述信息显示在屏幕上即可。
+** 实验过程
+   1. 在 bootsect.s 中输出字符串的方法是
+      #+srcname: bootsect
+      #+begin_src asm
+        mov	ah,#0x03		! 获取光标位置
+        xor	bh,bh
+        int	0x10
+
+        mov	cx,#27        ! 要输出的信息的长度（包括回车和换行符）
+        mov	bx,#0x0007		! page 0, attribute 7 (normal)
+        mov	bp,#msg1      ! 这是要输出的信息
+        mov	ax,#0x1301		! write string, move cursor
+        int	0x10
+      #+end_src
+** 实验报告
