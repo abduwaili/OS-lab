@@ -243,7 +243,7 @@ sectors:
 
 msg1:
 	.byte 13,10
-	.ascii "makeOS is booting ..."
+	.ascii "adu is running ..."
 	.byte 13,10,13,10
 
 .org 508
